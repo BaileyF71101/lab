@@ -1,95 +1,101 @@
 class Television:
+    """
+    This class is for all functions for a television remote, and where the television will follow commands
+    """
+
     MIN_CHANNEL = 0     # Minimum TV channel
     MAX_CHANNEL = 3     # Maximum TV channel
 
     MIN_VOLUME = 0      # Minimum TV volume
     MAX_VOLUME = 2      # Maximum TV volume
 
-    def __init__(self):
-
-        self.channel = 0
-        self.volume = 0
-        self.status = 'Off'
+    def __init__(self) -> None:
 
         """
-        - Create a private variable to store the TV channel. It should be set to the minimum TV channel by default.
-        - Create a private variable to store the TV volume. It should be set to the minimum TV volume by default.
-        - Create a private variable to store the TV status. The TV should start when it is off.
+        Constructor to create initial state of the television object, and to store private variables and their
+        parameters throughout file
+
+        :param self.__channel: the number associated with a particular television station
+        :param self.__volume: the number associated with the level of noise coming from the television
+        :param self.__status: the boolean value of 'on' or 'off', which describes if the television is powered
         """
 
-    def power(self):
+        self.__channel: int = 0
+        self.__volume: int = 0
+        self.__status: str = 'Off'
 
-        if self.status == 'On':
-            self.status = 'Off'
+    def power(self) -> None:
+
+        """
+        Method to activate/deactivate the television's power when called
+        """
+
+        if self.__status == 'On':
+            self.__status = 'Off'
         else:
-            self.status = "On"
+            self.__status = "On"
+
+    def channel_up(self) -> None:
 
         """
-        - This method should be used to turn the TV on/off.
-        - If called on a TV object that is off, the TV object should be turned on.
-        - If called on a TV object that is on, the TV object should be turned off.
+        Method to increase the self.__channel variable by 1, or reset to minimum value if self.__channel is at
+        maximum value when called
         """
 
-    def channel_up(self):
-
-        if self.status == "On":
-            if self.channel < Television.MAX_CHANNEL:
-                self.channel += 1
+        if self.__status == "On":
+            if self.__channel < Television.MAX_CHANNEL:
+                self.__channel += 1
             else:
-                self.channel = Television.MIN_CHANNEL
+                self.__channel = Television.MIN_CHANNEL
+
+    def channel_down(self) -> None:
 
         """
-        - This method should be used to adjust the TV channel by incrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MAX_CHANNEL, it should take the TV channel back to the MIN_CHANNEL.
+        Method to decrease the self.__channel variable by 1, or reset to maximum value if self.__channel is at
+        minimum value when called
         """
 
-    def channel_down(self):
-
-        if self.status == "On":
-            if self.channel > Television.MIN_CHANNEL:
-                self.channel -= 1
+        if self.__status == "On":
+            if self.__channel > Television.MIN_CHANNEL:
+                self.__channel -= 1
             else:
-                self.channel = Television.MAX_CHANNEL
+                self.__channel = Television.MAX_CHANNEL
+
+    def volume_up(self) -> None:
 
         """
-        - This method should be used to adjust the TV channel by decrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MIN_CHANNEL, it should take the TV channel back to the MAX_CHANNEL.
+        Method to increase the self.__volume variable by 1, or remain at same level if self.__volume is
+        already at maximum value when called
         """
 
-    def volume_up(self):
+        if self.__status == "On":
+            if self.__volume < Television.MAX_VOLUME:
+                self.__volume += 1
 
-        if self.status == "On":
-            if self.volume < Television.MAX_VOLUME:
-                self.volume += 1
-
-        """
-        - This method should be used to adjust the TV volume by incrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MAX_VOLUME, the volume should not be adjusted.
-        """
-
-    def volume_down(self):
-
-        if self.status == "On":
-            if self.volume > Television.MIN_VOLUME:
-                self.volume -= 1
+    def volume_down(self) -> None:
 
         """
-        - This method should be used to adjust the TV volume by decrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MIN_VOLUME, the volume should not be adjusted.
+        Method to decrease the self.__volume variable by 1, or remain at same level if self.__volume is
+        already at minimum value when called
         """
 
-    def __str__(self):
+        if self.__status == "On":
+            if self.__volume > Television.MIN_VOLUME:
+                self.__volume -= 1
+
+    def __str__(self) -> str:
+
+        """
+        Method to give the values of the variables self.__status, self.__channel, and self.__volume, in that
+        order
+
+        :return: returns a string stating the current states of the variables self.__status,
+        self.__channel, and self.__volume, in that order (regardless if input variables were type(str) or not
+        prior to return)
+        """
 
         stat = False
-        if self.status == "On":
+        if self.__status == "On":
             stat = True
 
-        return f'TV Status: Is on = {stat}, Channel = {self.channel}, Volume = {self.volume}'
-
-        # """
-        # - This method should be used to return the TV status using the format shown in the comments of main.py
-        # """
+        return f'TV Status: Is on = {stat}, Channel = {self.__channel}, Volume = {self.__volume}'

@@ -9,12 +9,13 @@ class Television:
     MIN_VOLUME = 0      # Minimum TV volume
     MAX_VOLUME = 2      # Maximum TV volume
 
-    def __init__(self) -> None:
+    def __init__(self, __channel: int, __volume: int, __status: str) -> None:
 
         """
         Constructor to create initial state of the television object, and to store private variables and their
         parameters throughout file
 
+        :param status:
         :param self.__channel: the number associated with a particular television station
         :param self.__volume: the number associated with the level of noise coming from the television
         :param self.__status: the boolean value of 'on' or 'off', which describes if the television is powered
